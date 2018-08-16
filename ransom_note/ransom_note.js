@@ -28,8 +28,10 @@ const makeHashTable = (string) => {
 
 //main function
 const yesRansom = (ransomStr, magazineStr) => {
+    //make hashtables for both the inpugt strings
     let ransomHT = makeHashTable(ransomStr);
     let magazineHT = makeHashTable(magazineStr);
+    //check if every character needed in the ransom note is present the sufficient amount of times in the magazine hashtable
     for (key in ransomHT) {
         if (!magazineHT.hasOwnProperty(key) || magazineHT[key] < ransomHT[key]) {
             return false;
