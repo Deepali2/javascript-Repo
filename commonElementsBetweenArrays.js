@@ -1,7 +1,7 @@
 //given two sorted arrays, find the number of elements in common. The arrays are of the same length and each has all distinct elements
 
-let A = [13, 27, 35, 40, 49, 55, 55, 59];
-let B = [17, 35, 39, 40, 55, 58, 55, 60];
+let A = [13, 27, 35, 40, 49, 55, 55, 59, 55, 55, 55, 55, 55, 55, 55];
+let B = [17, 35, 39, 40, 55, 58, 55, 55, 60, 13];
 
 const elementsInCommon = (A, B) => {
   let commonElements = [];
@@ -18,7 +18,7 @@ const elementsInCommon = (A, B) => {
     }
   }
   for (i = 0; i < A.length; i++) {
-    if (A[i] in hash) {
+    if (A[i] in hash && hash[A[i]] > 0) {
       commonElements.push(A[i]);
       hash[A[i]]--;
       numberOfCommmon++;
