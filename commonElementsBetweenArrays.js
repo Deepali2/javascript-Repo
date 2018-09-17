@@ -1,7 +1,8 @@
 //given two sorted arrays, find the number of elements in common. The arrays are of the same length and each has all distinct elements
 
-let A = [13, 27, 35, 40, 49, 55, 55, 59, 55, 55, 55, 55, 55, 55, 55];
-let B = [17, 35, 39, 40, 55, 58, 55, 55, 60, 13];
+
+let A = [13, 27, 35, 40, 49, 55, 59, 60];
+let B = [17, 35, 39, 40, 55, 58, 60];
 
 const elementsInCommon = (A, B) => {
   let commonElements = [];
@@ -29,3 +30,26 @@ const elementsInCommon = (A, B) => {
 };
 
 console.log(elementsInCommon(A, B));
+
+//The above algorithm runs in O(n) time.
+
+//using the fact that the arrays are sorted we can improve the run time. We can skip making a hash table that requires more space and work with the given arrays. 
+// since the elements are sorted we can limit the number of items to check.
+
+const commonUsingSortedness = (A, B) => {
+  let index = 0;
+  let numberOfCommmon = 0;
+  let commonElements = [];
+  for (let i = 0; i < A.length; i++) {
+    for (let j = index; j < B.length; j++) {
+      if (B[j] === A[i]) {
+        index = j + 1;
+        numberOfCommmon++;
+        commonElements.push(A[i]);
+      }
+    }
+  }
+  return commonElements;
+}
+
+console.log(commonUsingSortedness(A, B));
