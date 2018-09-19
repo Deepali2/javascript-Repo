@@ -138,3 +138,42 @@ var AIAction.DESCENDING = function(firstAction, secondAction) {
     return 1; // indicates that the second action goes before the first action
   } else return 0; // indicates a tie
 }
+
+//constructs the game object to be played
+var Game = function(autoPlayer) {
+  this.ai = autoPlayer;
+  this.currentState = new State();
+  this.currentState.board = [
+                              'E', 'E', 'E',
+                              'E', 'E', 'E',
+                              'E', 'E', 'E'
+                            ];
+  this.currentState.turn = 'X'; // X plays first
+  this.status = 'beginning'; // initialize the status of the game to beginning
+  //advance the game to a new state
+  this.advanceTo = function(_state) {
+    this.currentState =_state;
+    if (_state.isTerminal()) {
+      this.status = 'ended';
+      if (_state.result === 'X-won') {
+        ui.switchViewTo('won');
+      } else if(_state.result === 'O-won') ui.switchViewTo('lost');
+        else ui.switchViewTo('draw');
+    } else {
+      if (this.currentState.turn === 'X') ui.switchViewTo('Human');
+      else {
+        ui.switchViewTo('robot');
+        this.ai.notify('O');
+      }
+    }
+  };
+
+  //starts the game
+  this.start = function() {
+    if (this.status === 'beginning') {
+      //invoke advanceTo with the initial state
+      this.advanceTo(this.currentState);
+      this.status = 'running';
+    }
+  }
+};
