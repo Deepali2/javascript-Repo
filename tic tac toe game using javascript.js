@@ -122,7 +122,7 @@ var AIAction = function(pos) {
 };
 
 //defines a rule for sorting AI actions in ascending order
-var AIAction.ASCENDING = function(firstAction, secondAction) {
+AIAction.ASCENDING = function(firstAction, secondAction) {
   if (firstAction.minimaxVal < secondAction.minimaxVal ) {
     return -1; //indicates that the first action goes before the second action   
   } else if(firstAction.minimaxVal > secondAction.minimaxVal) {
@@ -131,7 +131,7 @@ var AIAction.ASCENDING = function(firstAction, secondAction) {
 }
 
 //defines a rule for sorting AI actions in descending order
-var AIAction.DESCENDING = function(firstAction, secondAction) {
+AIAction.DESCENDING = function(firstAction, secondAction) {
   if (firstAction.minimaxVal > secondAction.minimaxVal ) {
     return -1; //indicates that the first action goes before the second action   
   } else if(firstAction.minimaxVal < secondAction.minimaxVal) {
@@ -177,3 +177,12 @@ var Game = function(autoPlayer) {
     }
   }
 };
+
+//calculates the score of the player X in a terminal state
+Game.score = function(_state) {
+  if (_state.result !== 'still running') {
+    if (_state.result === 'X-won') return 10 - _state.oMovesCount;
+    else if (_state.result === 'O-won') return -10 + _state.oMovesCount;
+    else return 0;
+  }
+}
