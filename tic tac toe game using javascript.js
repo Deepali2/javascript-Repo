@@ -120,3 +120,21 @@ var AIAction = function(pos) {
     return next;
   }
 };
+
+//defines a rule for sorting AI actions in ascending order
+var AIAction.ASCENDING = function(firstAction, secondAction) {
+  if (firstAction.minimaxVal < secondAction.minimaxVal ) {
+    return -1; //indicates that the first action goes before the second action   
+  } else if(firstAction.minimaxVal > secondAction.minimaxVal) {
+    return 1; // indicates that the second action goes before the first action
+  } else return 0; // indicates a tie
+}
+
+//defines a rule for sorting AI actions in descending order
+var AIAction.DESCENDING = function(firstAction, secondAction) {
+  if (firstAction.minimaxVal > secondAction.minimaxVal ) {
+    return -1; //indicates that the first action goes before the second action   
+  } else if(firstAction.minimaxVal < secondAction.minimaxVal) {
+    return 1; // indicates that the second action goes before the first action
+  } else return 0; // indicates a tie
+}
