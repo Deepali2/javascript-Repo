@@ -186,3 +186,38 @@ Game.score = function(_state) {
     else return 0;
   }
 }
+
+//recursive function that calculates the minmax value of a game state
+function minimaxVal(state) {
+  if (state.isTerminal()) {
+    return Game.score(state);
+  } else {
+    var stateScore; //this stores the minimax value we will compute
+    if (state.turn === 'X') 
+      stateScore = -1000; //initialize to a value smaller than any possible score
+    else stateScore = 1000;
+      var availablePositions = state.emptyCells();
+      //enumerate next available states using the info from available positions
+      var availableNextStates = availablePositions.map(function(pos) {
+        var action = new AIAction(pos);
+        var nextState = action.applyTo(state);
+        return nextState;
+      });
+      //calculate the minimax value for all available next states and evaluate the current state's value
+      availableNextStates.forEach(function(nextState) {
+        if (state.turn === 'X') {
+          //X wants to maximize---> update stateScore iff nextScore is larger
+          if(nextScore > stateScore) {
+            stateScore = nextScore;
+          }else {
+            //O wants to maximize---> update stateScore iff nextScore is smaller
+            if (nextScore < stateScore) {
+              stateScore = nextScore;
+            }
+          }
+        }
+      });       
+      //backup the minimax value
+      return stateScore;    
+  }
+}
