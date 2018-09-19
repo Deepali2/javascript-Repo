@@ -221,3 +221,34 @@ function minimaxVal(state) {
       return stateScore;    
   }
 }
+
+//MASTER MOVE
+//make the ai plater take a master move: If X is the one making the 
+//decision, the choose the action with the maximum minimax value
+//if O is the one making the decision then choose the action with the 
+//minimum minimax value
+function takeAMasterMove(turn) {
+  var available = game.currentState.emptyCells();
+  //enumerate and calculate the score for each available actions to the ai player
+  var availableActions = available.map(function(pos) {
+    var action = new AIAction(pos);//create the action object
+    //get next state by applying the action
+    var next = action.applyTo(game.currentState);
+    //calculate and set the action's minimax value;
+    action.minimaxVal = minimaxVal(next);
+    return action;
+  });
+  //sort the enumerated actions list by score
+  //X maximizes ---> descend sort the actions to have the largest minimax at first
+  if (turn === 'X') availableActions.sort(AIAction.DESCENDING);
+  //else sort ascending
+  else availableActions.sort(AIAction.ASCENDING);
+  //take the first step as it's the optimal
+  var chosenAction = availableActions[0];
+  var next = chosenAction.applyTo(game.currentState);
+  //this just adds an X or an O at the chosen position on the board in the UI
+  ui.insertAt(chosenAction.movePosition, turn);
+  //take the game to the next state
+  game.advanceTo(next);
+
+}
