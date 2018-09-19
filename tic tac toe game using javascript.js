@@ -103,3 +103,20 @@ var AI = function(level) {
     }
   };
 };
+
+//constructs an action that the AI player could move
+var AIAction = function(pos) {
+  //the position on the board that the action would put the letter on
+  this.movePosition = pos;
+  //the minimax value of the state that the action leads to when applied
+  this.minimaxVal = 0;
+  //applies the action to a state to get the next state
+  this.applyTo = function(state) {
+    var next = new State(state);
+    //put the letter on the board
+    next.board[this.movePosition] = state.turn;
+    if (state.turn === 'O') next.oMovesCount++;
+    next.advanceTurn();
+    return next;
+  }
+};
