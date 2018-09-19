@@ -1,0 +1,105 @@
+//represent a state in a game
+
+var State = function(old) {
+
+  //the player who has the turn to play
+  this.turn = '';
+
+  //number of moves of the AI player
+  this.oMovesCount = 0;
+
+  //result of a game in a state.
+  this.result = 'still running';
+
+  //board configuration in a state.
+  this.board = [];
+  if (typeof old !== "undefined") {
+    var len = old.board.length;
+    this.board = new Array(len);
+    for (var itr = 0; itr < len; itr++) {
+      this.board[itr] = old.board[itr];      
+    }
+    this.oMovesCount = old.oMovesCount;
+    this.result = old.result;
+    this.turn = old.turn;
+  }
+
+  //function to advance the turn in a state.
+  this.advanceTurn = function() {
+    this.turn = this.turn === 'X' ? 'O' : 'X';
+  }
+
+  //function to enumerate all the empty cells in the state. It returns the indices of all the empty cells.
+  this.emptyCells = function() {
+    var indxs = [];
+    for (var itr = 0; itr < 9; itr++) {
+      if (this.board[itr] === 'E') {
+        indxs.push(itr);
+      }      
+    }
+    return indxs;
+  }
+
+  //function to check if a state is terminal or not.
+  //the state result is updated to reflect the result of the game
+  //returns true if the state is terminal, false if it isn't
+  this.isTerminal = function() {
+    var B = this.board;
+    //check rows
+    for (var i = 0; i <= 6; i + 3) {
+      if (B[i] !== 'E' && B[i] === B[i + 1] && B[i + 1] === B[i + 2]) {
+        //update the state result
+        this.result = B[i] + '-won';    
+        return true;  
+      }
+    }
+    //check columns
+    for (var i = 0; i <= 2; i++) {
+      if (B[i] !== 'E' && B[i] === B[i + 3] && B[i + 3] === B[i + 6]);
+      this.result = B[i] + '-won';
+      return true;
+    }
+    //check diagonals
+    for (var i = 0, j = 4; i <= 2; i = i + 2, j = j - 2) {
+      if(B[i] === 'E' && B[i] === B[i + j] && B[i + j] === B[i + 2*j]) {
+        this.result = B[i] + '-won';
+        return true;
+      }
+    }
+    var available = this.emptyCells();
+    if(available.length === 0) {
+      this.result = 'draw';
+      return true;
+    } else {
+      return false;
+    }
+  }
+};
+
+//constructs an AI with a specific level of intelligence: blind, novice, master
+var AI = function(level) {
+  //level of intelligece the player wishes to play at
+  var levelOfIntelligence = level;
+  //the game the player is playing
+  var game = {};
+  //recursive function to compute the minimax value of a game state. It returns the minimax value of a state.
+  function minimaxValue(state) { ... };
+  //make the AI take a blind move by making a random move
+  function takeABlindMove(turn) { ... };
+  //make the AI take a novice move by choosing a move between optimal and suboptimal
+  function takeANoviceMove(turn);
+  //make the AI take a master move by choosing the optimal minimax move
+  function takeAMasterMove(turn){ ... };
+  //specify the game the player wishes to play
+  this.plays = function (_game) {
+    let game = _game;
+  };
+  //tell the player that it is the player's turn
+  this.notify = function(turn) {
+    switch (levelOfIntelligence) {
+      case 'blind' : takeABlindMove(turn); break;
+      case 'novice' : takeANoviceMove(turn); break;
+      case 'master' : takeAMasterMove(turn); break;
+    }
+  };
+};
