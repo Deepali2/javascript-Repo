@@ -250,5 +250,54 @@ function takeAMasterMove(turn) {
   ui.insertAt(chosenAction.movePosition, turn);
   //take the game to the next state
   game.advanceTo(next);
+}
 
+//NOVICE MOVE
+
+//way to program with probability
+var P = 40; //some probability in percent form
+if (Math.random()*100 <= P) {
+  //carry out the probability task with probability P
+} else {
+  //carry out the probability task with the probability 1 - P
+}
+
+//programming such that AI misses the optimal move 60% of the time, and make it for 40% of the time
+function takeANoviceMove(turn) {
+  var available = game.currentState.emptyCells();
+   //enumerate and calculate the score for each available actions to the ai player
+   var availableActions = available.map(function(pos) {
+    var action = new AIAction(pos);//create the action object
+    //get next state by applying the action
+    var next = action.applyTo(game.currentState);
+    //calculate and set the action's minimax value;
+    action.minimaxVal = minimaxVal(next);
+    return action;
+  });
+  //sort the enumerated actions list by score
+  //X maximizes ---> descend sort the actions to have the largest minimax at first
+  if (turn === 'X') availableActions.sort(AIAction.DESCENDING);
+  //else sort ascending
+  else availableActions.sort(AIAction.ASCENDING);
+  //take the optimal action 40% of the time
+  var chosenAction;
+  if (Math.random() * 100 <= 40) chosenAction = availableActions[0];
+  //if there are two or more available actions, choose the 1st suboptimal
+  else if(availableActions.length >= 2) chosenAction = availableActions[1];
+  //choose the only available action
+  else chosenAction = availableActions[0];
+  var next = chosenAction.applyTo(game.currentState);
+  ui.insertAt(chosenAction.movePosition, turn);
+  //take the game to the next state
+  game.advanceTo(next);
+};
+
+//Blind Move: a blind player is one whoi knows nothing about the game
+function takeABlindMove(turn) {
+  var available = game.currentState.emptyCells();
+  var randomCell = available[Math.floor(Math.random() * available.length)];
+  var action = new AIAction(randomCell);
+  var next = action.applyTo(game.currentState);
+  ui.insertAt(randomCell, turn);
+  game.advanceto(next);
 }
