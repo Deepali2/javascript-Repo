@@ -1,5 +1,10 @@
 //given two strings, write a method to decide if one is a permutation of the other
 
+//input: two strings
+//output: boolean
+//constraints: assuming that spaces do not matter but case does matter
+//edges: none
+
 let string1 = 'chec king';
 let string2 = 'c hin ecg';
  
