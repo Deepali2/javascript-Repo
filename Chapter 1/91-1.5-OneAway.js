@@ -15,7 +15,6 @@ const oneAway = (str1, str2) => {
     str2 = temp;  
     diff = -diff;      
   };
-  console.log(diff)
   //if lengths differ by more than one then we know that there are more than one edits
   if (diff > 1) return false; 
   //if difference is equal to one then check to see the number of edits
