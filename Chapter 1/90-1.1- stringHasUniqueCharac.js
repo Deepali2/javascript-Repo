@@ -1,6 +1,6 @@
 //Implement an algorithm to determine if a string has all unique characters. What if you cannot use additional data structures?
 
-let string = 'this werd';
+
 const stringHasUniqueCharac = (string) => {
   //remove spaces from string
   let string1 = string.replace(/\s/g, '');  
@@ -18,4 +18,4 @@ const stringHasUniqueCharac = (string) => {
   return true;
 };
 
-console.log(stringHasUniqueCharac(string));
+console.log(stringHasUniqueCharac('this werdn    abcf1%'));
