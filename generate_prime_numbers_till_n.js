@@ -20,7 +20,8 @@ const binarySearch = (array, target) => {
 
 //main function
 const generatePrimesTillN = (n) => { 
-  if (n < 1) return 'Invalid Number. Please give a positive whole number greater than or equal to 2';
+  if (n < 1) n = -n;
+  if (n === 0) return 'Invalid Number. Please give a positive whole number greater than or equal to 2';  
   else if (n === 1) return ' 1 is neither prime nor composite since it has only one factor which is 1';
   else if (n >= 2 && n <= primes[primes.length - 1]) {
     return binarySearch(primes, n);    
@@ -48,7 +49,8 @@ const generatePrimesTillN = (n) => {
   }  
 };
 
-console.log(generatePrimesTillN(1900890));
+console.log(generatePrimesTillN(60));
+
 console.log(primes)
 
 
