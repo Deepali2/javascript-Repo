@@ -50,8 +50,8 @@ const generatePrimesTillN = (n) => {
   }  
 };
 
-console.log(generatePrimesTillN(6.23));
+console.log(generatePrimesTillN());
 
-console.log(primes)
+
 
 
