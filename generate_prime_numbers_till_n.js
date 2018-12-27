@@ -20,6 +20,7 @@ const binarySearch = (array, target) => {
 
 //main function
 const generatePrimesTillN = (n) => { 
+  if (isNaN(n)) return 'Please provide a number';
   n = Math.floor(n);
   if (n < 1) n = -n;
   if (n === 0) return 'Invalid Number. Please give a positive whole number greater than or equal to 2';  
@@ -29,7 +30,6 @@ const generatePrimesTillN = (n) => {
   } else {
     //number given is greater than the last number in the primes array    
     let numberToCheck = primes[primes.length - 1] + 2;   
-    console.log(numberToCheck);
 
     //helper function to check if number is prime
     const checkPrime = (number) => {
@@ -40,8 +40,7 @@ const generatePrimesTillN = (n) => {
         else if (number % primes[i] === 0) return false;
       }
     };
-  console.log(numberToCheck);
-  console.log(n);
+  
     while(numberToCheck <= n) {   
       if (checkPrime(numberToCheck)) primes.push(numberToCheck);           
       numberToCheck = numberToCheck + 2;
@@ -50,7 +49,7 @@ const generatePrimesTillN = (n) => {
   }  
 };
 
-console.log(generatePrimesTillN(1000));
+console.log(generatePrimesTillN());
 
 
 
