@@ -12,7 +12,30 @@ Constraints:
 [input] array.integer arr
  
  */
+ let arr = [2, -7, -2, -2, 0];
+ function absSort(arr) {
+   let array = arr.slice();
+   array.sort();
+   console.log(array)
+   for (let i = 0; i < array.length - 1; i++) {
+     for (let j = i; j < array.length; j++) {
+       if (Math.abs(array[i]) > Math.abs(array[j])) [array[i], array[j]] = [array[j], array[i]];
+       if (Math.abs(array[i]) === Math.abs(array[j])) {
+         if (array[i] > array[j]) [array[i], array[j]] = [array[j], array[i]];
+       }
+     }
+   }
+   return array;
+ }
 
+ console.log(absSort(arr));
+
+//TIme Complexity is O(N^2);
+//Space Complexity is O(N);
+
+
+
+//ANOTHER WAY:
 
 //helper function to make a hash table from an array
 const hash = (array) => {
@@ -45,7 +68,7 @@ const leastKey = (keys) => {
 };
 
 //main function
-function absSort(arr) {
+function absoluteSort(arr) {
   let sortedAbs = [];
   let hashObj = hash(arr);
   console.log(hashObj)
@@ -64,4 +87,4 @@ function absSort(arr) {
   return sortedAbs;
 }
 
-console.log(absSort([-7, 2, -2, -2, 0]));
+console.log(absoluteSort([-7, 2, -2, -2, 0]));
