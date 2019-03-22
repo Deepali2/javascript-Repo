@@ -1,3 +1,69 @@
+/*
+Find The Duplicates
+Given two sorted arrays arr1 and arr2 of passport numbers, implement a function findDuplicates that returns an array of all passport numbers that are both in arr1 and arr2. Note that the output array should be sorted in an ascending order.
+
+Let N and M be the lengths of arr1 and arr2, respectively. Solve for two cases and analyze the time & space complexities of your solutions: M ≈ N - the array lengths are approximately the same M ≫ N - arr2 is much bigger than arr1.
+
+Example:
+
+input:  arr1 = [1, 2, 3, 5, 6, 7], arr2 = [3, 6, 7, 8, 20]
+
+output: [3, 6, 7] # since only these three values are both in arr1 and arr2
+Constraints:
+
+[time limit] 5000ms
+
+[input] array.integer arr1
+
+1 ≤ arr1.length ≤ 100
+[input] array.integer arr2
+
+1 ≤ arr2.length ≤ 100
+[output] array.integer
+*/
+//Method in which sorting does not matter. Linear time complexity
+//helper function to make a hash from an array
+const object = (array) => {
+ 
+  let obj = {};
+  for (let element of array) {
+    obj[element] = obj[element] + 1 || 1;
+  }
+  return obj;
+};
+
+function duplicates (ar1, ar2) {
+  let results = [];
+  let obj1 = object(ar1);
+  let obj2 = object(ar2);
+  
+  let smallerObj = obj1;
+  let largerObj = obj2;
+  
+  
+  let obj1Length = Object.keys(obj1).length;
+  let obj2Length = Object.keys(obj2).length;
+  
+  if (obj1Length > obj2Length) {
+    smallerObj = obj2;
+    largerObj = obj1;
+  } 
+ console.log(obj1);
+ console.log(obj2);
+  for (let key in smallerObj) {
+    if (largerObj.hasOwnProperty(key)) results.push(parseInt(key));
+  }
+  return results;
+}
+
+console.log(duplicates([11], [11]))
+console.log(duplicates([1, 2, 3, 3, 5, 6, 7, 9, 10, 10, 40, 40], [3, 6, 7, 8, 20, 40]));
+
+
+
+
+//Method in which sorting matters
+
 //helper function in the case when the lengths of the two arrays are equivalent
 const duplicates = (arr1, arr2) => {
    // arr1 < arr2 
