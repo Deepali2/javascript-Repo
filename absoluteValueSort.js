@@ -12,6 +12,24 @@ Constraints:
 [input] array.integer arr
  
  */
+
+
+function absSort(arr) {
+  let compare = (a,b) => {
+    let aAbs = Math.abs(a);// 2
+    let bAbs = Math.abs(b);// -2
+    if (aAbs === bAbs) {
+      return a - b;
+    }
+    else return aAbs - bAbs;
+  }
+	return arr.sort(compare);
+}
+//O(NlogN); space compexity is O(N)
+
+console.log(absSort([2, -7, -2, -2, 0]));
+
+//ANOTHER WAY
  let arr = [2, -7, -2, -2, 0];
  function absSort(arr) {
    let array = arr.slice();
@@ -32,7 +50,6 @@ Constraints:
 
 //TIme Complexity is O(N^2);
 //Space Complexity is O(N);
-
 
 
 //ANOTHER WAY:
@@ -88,3 +105,5 @@ function absoluteSort(arr) {
 }
 
 console.log(absoluteSort([-7, 2, -2, -2, 0]));
+//TIme Complexity is O(N^2);
+//Space Complexity is O(N);
