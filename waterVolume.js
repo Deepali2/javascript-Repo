@@ -10,8 +10,6 @@ Given list of mountain heights, find volume of water trapped during rain
 //make array recording absolute difference between original and minimum array [0, 0, 2, 0, 1, 2, 0, 0]
 //add up the contents of the last array
 
-
-
 //main function
 const waterVolume = (arr) => {
   let maxL2R = [];

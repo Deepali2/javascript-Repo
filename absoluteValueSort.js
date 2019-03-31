@@ -36,7 +36,7 @@ console.log(absSort([2, -7, -2, -2, 0]));
    array.sort();
    console.log(array)
    for (let i = 0; i < array.length - 1; i++) {
-     for (let j = i; j < array.length; j++) {
+     for (let j = i + 1; j < array.length; j++) {
        if (Math.abs(array[i]) > Math.abs(array[j])) [array[i], array[j]] = [array[j], array[i]];
        if (Math.abs(array[i]) === Math.abs(array[j])) {
          if (array[i] > array[j]) [array[i], array[j]] = [array[j], array[i]];

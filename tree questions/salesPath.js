@@ -34,7 +34,7 @@ Constraints:
 //create a Node
 function Node(cost) {
   this.cost = cost;
-  this.children = [];
+  this.children = []; 
 }
 
 //create the tree
@@ -59,14 +59,70 @@ node5.children.push(node9);
 node6.children.push(node10);
 node9.children.push(node11);
 
-function getCheapestCost(node, totalCost = 0, result = Infinity) {
+function getCheapestCost1(node, totalCost = 0, result = Infinity) {
   totalCost += node.cost;
   //base case
   if (node.children.length === 0) return totalCost;
   //recursive 
   node.children.forEach(child => {
-    result = Math.min(result, getCheapestCost(child, totalCost, result))
+    result = Math.min(result, getCheapestCost1(child, totalCost, result))
   });
   return result;
 }
-console.log(getCheapestCost(node0));
+console.log(getCheapestCost1(node0));
+
+//Another way
+function getCheapestCost2(root, accumulatedCost = 0) {
+  if (!root)return null;
+  if (root.lowestCostToLeaf)return root.lowestCostToLeaf;
+  let lowestCostToLeaf = accumulatedCost+root.cost;
+  if (root.children.length > 0) {
+    lowestCostToLeaf+=Math.min(
+      ...root.children.map(
+        child => getCheapestCost2(child, accumulatedCost)
+      )
+    );
+  }
+  root.lowestCostToLeaf = lowestCostToLeaf;
+  return lowestCostToLeaf;
+}
+
+/******************************************
+ * Use the helper code below to implement *
+ * and test your function above           *
+ ******************************************/ 
+
+// Constructor to create a new Node
+function Node(cost) {
+  this.cost = cost;
+  this.children = [];
+  this.lowestCostToLeaf = null;
+}
+
+let Honda = new Node(0);
+let l25 = new Node(5);
+let l23 = new Node(3);
+let l26 = new Node(6);
+Honda.children = [l25, l23, l26];
+
+let l34 = new Node(4);
+let l32 = new Node(2);
+let l30 = new Node(0);
+let l31 = new Node(1);
+let l35 = new Node(5);
+
+l25.children = [l34];
+l23.children = [l32, l30];
+l26.children = [l31, l35];
+
+let l41 = new Node(1);
+let l310 = new Node(10);
+
+l32.children = [l41];
+l30.children = [l310];
+
+let l510 = new Node(10);
+
+l41.children = [l510];
+
+console.log(getCheapestCost2(Honda));
