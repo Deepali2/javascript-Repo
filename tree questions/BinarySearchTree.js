@@ -41,7 +41,12 @@ class BinarySearchTree {
     }
     return (`The node ${val} has been added to the binary search tree.`);
   }
-
+  /*
+  Depth First Traversals:
+  (a) Inorder (Left, Root, Right) : 4 2 5 1 3
+  (b) Preorder (Root, Left, Right) : 1 2 4 5 3
+  (c) Postorder (Left, Right, Root) : 4 5 2 3 1
+  */
   //Depth first traversal is of three types: inorder, preorder, postorder
   //Breadth first traversal is only of one type: Breadth first traversal
   
@@ -102,4 +107,5 @@ console.log(BST1.insertNode(14));
 console.log(BST1.insertNode(4));
 console.log(BST1.insertNode(7));
 console.log(BST1.insertNode(13));
+console.log(BST1.inOrderTraversal(BST1.root));
 console.log(BST1.printTreeInLevelOrder(BST1));
