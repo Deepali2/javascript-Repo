@@ -6,7 +6,6 @@ function solution(A) {
   let momentsAllOn = 0;
   let maxSoFar = A[0];
   for (let i = 0; i < A.length; i++) {
-    console.log(maxSoFar)
     if (A[i] >= maxSoFar) {
       momentsAllOn++;
       maxSoFar = A[i];
