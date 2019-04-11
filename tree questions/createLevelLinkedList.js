@@ -19,7 +19,8 @@ function Node(val) {
   this.right = null;
 }
 
-let tree1 = new Tree();
+//creating a binary tree
+const tree1 = new Tree();   
 let node7 = new Node(7);
 tree1.root = node7;
 let node1 = new Node(1);
@@ -30,15 +31,30 @@ let node5 = new Node(5);
 let node8 = new Node(8);
 let node9 = new Node(9);
 let node11 = new Node(11);
+let node18 = new Node(18);
 
 node7.left = node1;
 node7.right = node5;
 node1.left = node2;
+node1another.right = node18;
 node1.right = node1another;
 node1another.left = node2another;
 node5.left = node8;
 node5.right = node9;
 node9.left = node11;
+
+function maxDepthTree(root, depth = 1) {
+  //base case
+  if(!root) return 0;
+  //terminating case when a leaf is reached;
+  if (root.left === null && root.right === null) return depth
+
+  if (root.left && root.right) return Math.max(maxDepthTree(root.left, depth + 1), maxDepthTree(root.right, depth + 1));
+  else if(root.left) return maxDepthTree(root.left, depth + 1);  
+  else if(root.right) return maxDepthTree(root.right, depth + 1);
+  
+}
+console.log(maxDepthTree(tree1.root))
 
 function preorderTree(root) {
   //root left right
@@ -75,10 +91,11 @@ function breadthTraverseTree(tree) {
   }
 }
 
-preorderTree(tree1.root);
-inorderTree(tree1.root);
-postorderTree(tree1.root);
-breadthTraverseTree(tree1);
+//testing
+// preorderTree(tree1.root);
+// inorderTree(tree1.root);
+// postorderTree(tree1.root);
+// breadthTraverseTree(tree1);
 
 //create a binary Search Tree
 //A binary search tree is a special type of a binary tree in which the values are in order
@@ -158,17 +175,79 @@ class BinarySearchTree {
   }
 }
 
-const BST1 = new BinarySearchTree();
-console.log(BST1.insertANode(3));
-console.log(BST1.insertANode(1));
-console.log(BST1.insertANode(5));
-console.log(BST1.insertANode(4));
-console.log(BST1.insertANode(0));
-console.log(BST1.insertANode(8));
-console.log(BST1.insertANode(2));
-console.log(BST1.insertANode(10));
-console.log(BST1.inorder(BST1.root));
-console.log(BST1.preorder(BST1.root));
-console.log(BST1.postorder(BST1.root));
-console.log(BST1.breadthTraverse(BST1));
+//testing
+// const BST1 = new BinarySearchTree();
+// console.log(BST1.insertANode(3));
+// console.log(BST1.insertANode(1));
+// console.log(BST1.insertANode(5));
+// console.log(BST1.insertANode(4));
+// console.log(BST1.insertANode(0));
+// console.log(BST1.insertANode(8));
+// console.log(BST1.insertANode(2));
+// console.log(BST1.insertANode(10));
+// console.log(BST1.inorder(BST1.root));
+// console.log(BST1.preorder(BST1.root));
+// console.log(BST1.postorder(BST1.root));
+// console.log(BST1.breadthTraverse(BST1));
 
+//code to create a doubly linked list
+class DoublyLinkedList {
+  constructor() {
+    this.head = null;
+    this.tail = null;
+  }
+
+  //insert a node
+  insertAtTail(value) {
+    let node = {
+      data: value,
+      next : null,
+      previous : null
+    };
+    if(!this.head) {
+      this.head = node;
+      this.tail = node;
+      return (`${value} has been added as the head of the doubly linked list`);
+    }
+    let current = this.tail;
+    current.next = node;
+    node.previous = current;
+    this.tail = node;
+    return (`${value} added at the tail`)
+  }
+}
+
+//testing Doubly LinkedList
+
+// const DLL1 = new DoublyLinkedList();
+// console.log(DLL1.insertAtTail(2));
+// console.log(DLL1.insertAtTail(8));
+// console.log(DLL1.insertAtTail(19));
+
+function createLevelLinkedList(tree) {
+  let depth = findDepthTree(tree.root);
+  let lists = [];
+  let queue = [];
+  let temp;
+  let list = new DoublyLinkedList();
+  let level = 0;
+  let arr = [tree.root, level];
+  queue.push(arr);
+  while(queue.length) {
+    temp = queue.splice(0, 1)[0];
+    if (temp[1] === level) {
+      list.insertAtTail(temp[0].data);
+    }
+    else {
+      lists.push(list);
+      
+      level++;
+      list = new DoublyLinkedList();
+      list.insertAtTail(temp[0].data);
+    }
+    if(temp[0].left) queue.push([temp[0].left, level]);
+    if (temp[0].right) queue.push([temp[0].right, level]);
+  }  
+}
+
+console.log(createLevelLinkedList(tree1));
