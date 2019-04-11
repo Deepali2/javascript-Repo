@@ -32,6 +32,8 @@ let node8 = new Node(8);
 let node9 = new Node(9);
 let node11 = new Node(11);
 let node18 = new Node(18);
+let node20 = new Node(20);
+let node30 = new Node(30);
 
 node7.left = node1;
 node7.right = node5;
@@ -42,6 +44,8 @@ node1another.left = node2another;
 node5.left = node8;
 node5.right = node9;
 node9.left = node11;
+node2.left = node30;
+node2.right = node20;
 
 function maxDepthTree(root, depth = 1) {
   //base case
@@ -215,6 +219,18 @@ class DoublyLinkedList {
     this.tail = node;
     return (`${value} added at the tail`)
   }
+
+  //print List from head to tail
+  printHeadToTail() {
+    if (!this.head) return null;
+    let arr = [];
+    let current = this.head;
+    while (current) {
+      arr.push(current.data);
+      current = current.next;
+    } 
+    return arr;
+  }
 }
 
 //testing Doubly LinkedList
@@ -223,31 +239,49 @@ class DoublyLinkedList {
 // console.log(DLL1.insertAtTail(2));
 // console.log(DLL1.insertAtTail(8));
 // console.log(DLL1.insertAtTail(19));
+// console.log(DLL1.printHeadToTail());
 
 function createLevelLinkedList(tree) {
-  let depth = findDepthTree(tree.root);
+  if(!tree.root) return null;
+  let depth = maxDepthTree(tree.root);
   let lists = [];
   let queue = [];
   let temp;
   let list = new DoublyLinkedList();
-  let level = 0;
+  let level = 1;
   let arr = [tree.root, level];
   queue.push(arr);
   while(queue.length) {
+    //dequeue the first element in the queue
     temp = queue.splice(0, 1)[0];
+    //add to the queue
+    if(temp[0].left) queue.push([temp[0].left, temp[1] + 1]);
+    if (temp[0].right) queue.push([temp[0].right, temp[1] + 1]);
+
     if (temp[1] === level) {
       list.insertAtTail(temp[0].data);
+      if (queue.length === 0) lists.push(list);  //to get the elements in the deepest level of the tree
     }
     else {
       lists.push(list);
-      
-      level++;
+      ++level;
       list = new DoublyLinkedList();
       list.insertAtTail(temp[0].data);
     }
-    if(temp[0].left) queue.push([temp[0].left, level]);
-    if (temp[0].right) queue.push([temp[0].right, level]);
-  }  
+
+  } 
+  return lists;
 }
 
-console.log(createLevelLinkedList(tree1));
+//testing createLevelLinkedList
+let arrayOfDoublyLinkedLists = createLevelLinkedList(tree1);
+console.log(printcreateLevelLinkedList(arrayOfDoublyLinkedLists));
+
+function printcreateLevelLinkedList(arrayOfDoublyLinkedLists) {
+  let results = [];
+  console.log(arrayOfDoublyLinkedLists.length);
+  for (let ele of arrayOfDoublyLinkedLists) {
+    results.push(ele.printHeadToTail());
+  }
+  return results;
+}
