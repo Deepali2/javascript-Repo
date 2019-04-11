@@ -180,19 +180,19 @@ class BinarySearchTree {
 }
 
 //testing
-// const BST1 = new BinarySearchTree();
-// console.log(BST1.insertANode(3));
-// console.log(BST1.insertANode(1));
-// console.log(BST1.insertANode(5));
-// console.log(BST1.insertANode(4));
-// console.log(BST1.insertANode(0));
-// console.log(BST1.insertANode(8));
-// console.log(BST1.insertANode(2));
-// console.log(BST1.insertANode(10));
-// console.log(BST1.inorder(BST1.root));
-// console.log(BST1.preorder(BST1.root));
-// console.log(BST1.postorder(BST1.root));
-// console.log(BST1.breadthTraverse(BST1));
+const BST1 = new BinarySearchTree();
+console.log(BST1.insertANode(3));
+console.log(BST1.insertANode(1));
+console.log(BST1.insertANode(5));
+console.log(BST1.insertANode(4));
+console.log(BST1.insertANode(0));
+console.log(BST1.insertANode(8));
+console.log(BST1.insertANode(2));
+console.log(BST1.insertANode(10));
+console.log(BST1.inorder(BST1.root));
+console.log(BST1.preorder(BST1.root));
+console.log(BST1.postorder(BST1.root));
+console.log(BST1.breadthTraverse(BST1));
 
 //code to create a doubly linked list
 class DoublyLinkedList {
@@ -276,10 +276,9 @@ function createLevelLinkedList(tree) {
 //testing createLevelLinkedList
 let arrayOfDoublyLinkedLists = createLevelLinkedList(tree1);
 console.log(printcreateLevelLinkedList(arrayOfDoublyLinkedLists));
-
+console.log(printcreateLevelLinkedList(createLevelLinkedList(BST1)));
 function printcreateLevelLinkedList(arrayOfDoublyLinkedLists) {
   let results = [];
-  console.log(arrayOfDoublyLinkedLists.length);
   for (let ele of arrayOfDoublyLinkedLists) {
     results.push(ele.printHeadToTail());
   }
