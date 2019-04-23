@@ -34,25 +34,27 @@ var twoSum1 = function(nums, target) {
 //A better solution usi hash a hash table : time complexity: O(n); space complexity: O(n)
 //helper function to create a hash table
 const hash = (arr) => {
-  console.log('hello')
   let obj = {};
   for (let i = 0; i < arr.length; i++) {
     obj[arr[i]] = i;
   }
   return obj;
 };
+console.log(hash([2, 3, 3]))
 
 //main function 
 const twoSum = (arr, target) => {
   let results = [];
   let obj = hash(arr);
-  console.log(obj)
   for (let i = 0; i < arr.length - 1; i++) {
     let complement = target - arr[i];
-    if (complement !== arr[i] && obj[complement]) {
+    if (complement === arr[i] && obj[complement] !== i) {
       results.push(i, obj[complement]);
       return results;
-    }
+    } else if (complement !== arr[i] && obj[complement]) {
+      results.push(i, obj[complement]);
+      return results;
+    } 
   }
   return `None add up to ${target}`;
 };
