@@ -46,9 +46,10 @@ const hash = (arr) => {
 const twoSum = (arr, target) => {
   let results = [];
   let obj = hash(arr);
+  console.log(obj)
   for (let i = 0; i < arr.length - 1; i++) {
     let complement = target - arr[i];
-    if (obj[complement]) {
+    if (complement !== arr[i] && obj[complement]) {
       results.push(i, obj[complement]);
       return results;
     }
@@ -56,5 +57,4 @@ const twoSum = (arr, target) => {
   return `None add up to ${target}`;
 };
 
-// console.log(twoSum([2, 7, 11, 15], 9));
-console.log(twoSum([3, 2, 4], 5));
+console.log(twoSum([1, 3, 4, 2], 6));
