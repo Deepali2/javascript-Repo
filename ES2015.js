@@ -44,9 +44,9 @@ Write a function called displayEvenArguments which accepts a variable number of 
 with all of the arguments that are even numbers.
 */
 
-function displayEvenArguments(){
-  let arr = Array.from(arguments);
-  return arr.filter(ele => ele % 2 === 0);
+function displayEvenArguments(...args){
+  // let arr = Array.from(arguments);
+  return args.filter(ele => ele % 2 === 0);
 }
 console.log(displayEvenArguments(1,2,3,4,5,6)); // [2,4,6]
 console.log(displayEvenArguments(7,8,9)) // [8]
