@@ -2,55 +2,62 @@
  * @param {string} str
  * @return {number}
  */
+
 var myAtoi = function(str) {
-  let MAX = 2**31 - 1;
-  let MIN = 2**31 * -1;
-  let negative = false;
-  let number = false;
-  let sign = false;
-  let string = '';
-  for (let i = 0; i < str.length; i++) {
-    if (str[i] === ' ') {
-      if (number === true && str[i + 1].match(/[0-9]/g)) return 0;
-      continue;
-    }
-    if (sign === false && str[i] === '+') {
-      sign = true;
-      continue;
-    }
-    if (sign === false && str[i] === '-') {
-      sign = true;
-      negative = true;
-      continue;
-    }
-    if (str[i].match(/\D/g) ) {
-      if (number === false) return 0;
-      else {
-        let num = parseInt(string);
-        if (negative === true) { 
-          num = num * -1; 
-          if (num <= MIN) return MIN;        
-        }
-        if (num >= MAX) return MAX;
-        return num;
-      }
-    }
-    if (str[i].match(/[0-9]/g)) {
-      number = true;
-      string += str[i];
-    }      
+  let sign = "";
+  let integralNumbers = '';
+  let index = 0;
+  
+  // Skip through all the whitespaces
+  while (str.charAt(index) === ' ') {
+      index++;
   }
-  if (number === true) {
-    let num = parseInt(string);      
-      if (negative === true) { 
-        num = num * -1; 
-        if (num <= MIN) return MIN;        
-      }
-      if (num >= MAX) return MAX;
-      return num;
+  
+  // Check for optional +/- sign
+  if (str.charAt(index) === '+' || str.charAt(index) === '-') {
+      sign = str.charAt(index);
+      index++;
   }
-  return 0;
+  
+  // Check for consecutive integral numbers
+  while (index < str.length) {
+      const char = str.charAt(index);
+      const regexp = /[0-9]/g;
+      if (regexp.test(char)) {
+          integralNumbers += char;
+          index++;
+      } else {
+          break;
+      }
+  }
+  
+  // Convert string to number
+  integralNumbers = sign === '-' ? -integralNumbers : integralNumbers;
+  
+  // Test for 32-bit boundaries
+  const INT_MAX = Math.pow(2, 31) - 1;
+  const INT_MIN = Math.pow(-2, 31);
+  
+  if (integralNumbers >= INT_MAX) {
+      return INT_MAX;
+  }
+  
+  if (integralNumbers <= INT_MIN) {
+      return INT_MIN;
+  }
+  
+  if (integralNumbers === '') return 0;
+  return integralNumbers;
 };
+
+
+
+ //works but uses parseInt
+// const myAtoi = (str) => {
+//   let MAX = 2**31 - 1;
+//   let MIN = 2**31 * -1;
+//   return Math.max(Math.min(parseInt(str)||0, MAX), MIN)
+// }
 
 console.log(typeof(myAtoi("42")));
 console.log(myAtoi("   -42"));
@@ -63,3 +70,7 @@ console.log(myAtoi("+1"));
 console.log(myAtoi("-+1"));
 console.log(myAtoi("  -0012a42"));
 console.log(myAtoi("   +0 123"));
+console.log(myAtoi("- 234"));
+console.log(myAtoi("0-1"));
+console.log(myAtoi("-827 "))
+console.log(myAtoi("    -88827   5655  U"))
