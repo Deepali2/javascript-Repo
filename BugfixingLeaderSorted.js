@@ -47,8 +47,7 @@ Copyright 2009–2019 by Codility Limited. All Rights Reserved. Unauthorized cop
 const hash = arr => {
   let obj = {};
   for (let ele of arr) {
-    if (obj[ele]) obj[ele]++;
-    else obj[ele] = 1;
+    obj[ele] = obj[ele] + 1 || 1;
   }
   return obj;
 };
