@@ -17,20 +17,9 @@ main function:
     compare the adjacent elements using the helper function. If they are sorted then the array is sorted
 */
 
-const words1 = ["ac", "bc", "aa"];
+const words1 = ["ac", "bc", "aa", "cats", "cat"];
 const words2 = ["bb", "bca", "cbc", "ccab", "ca", "accccbbaa"];
 const Alphabet = ["b", "c", "a"];
-
-//helper function to create an object with place value as values
-const alphabet = Alphabet => {
-  let obj = {};
-  num = 0;
-  for (let ele of Alphabet) {
-    obj[ele] = num;
-    num++;
-  }
-  return obj;
-};
 
 //helper swap function
 const swap = (a, b, array) => {
@@ -44,15 +33,15 @@ console.log(swap(arr[0], arr[5], arr));
 const sorted = (word1, word2, Alphabet) => {
   let word1Length = word1.length;
   let word2Length = word2.length;
-  let alphabetObj = alphabet(Alphabet);
   let lgth = word1Length > word2Length ? word1Length : word2Length;
 
   for (let i = 0; i < lgth; i++) {
-    let characPlace1 = alphabetObj[word1[i]];
-    let characPlace2 = alphabetObj[word2[i]];
-    if (characPlace1 < characPlace2) return true;
-    if (characPlace1 > characPlace2) return false;
+    let char1 = Alphabet.indexOf(word1[i]);
+    let char2 = Alphabet.indexOf(word2[i]);
+    if (char1 < char2) return true;
+    if (char1 > char2) return false;
   }
+  if (word1Length > word2Length) return false;
   return true;
 };
 
