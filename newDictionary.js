@@ -46,10 +46,11 @@ const sorted = (word1, word2, Alphabet) => {
     if (characPlace1 > characPlace2) return false;
     if (characPlace1 < characPlace2) return true;
   }
+  if (word1Length > word2Length) return false;
   return true;
 };
 
-console.log(sorted("bc", "aa", Alphabet));
+console.log(sorted("cats", "cat", Alphabet));
 
 //main function
 const isSorted = (words, Alphabet) => {
