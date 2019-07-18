@@ -5,77 +5,30 @@
 /*
 input: string
 output: number
-
 */
-const romanToInt = function(s) {
-  let i = 0;
+
+const romanToInt = str => {
   let num = 0;
-  while (i < s.length) {
-    if (s[i] === "M") {
-      num += 1000;
-      i++;
-    }
-
-    if (s[i] === "D") {
-      num += 500;
-      i++;
-    }
-
-    if (s[i] === "C") {
-      if (s[i + 1] === "M") {
-        num += 900;
-        i = i + 2;
-      } else if (s[i + 1] === "D") {
-        num += 400;
-        i = i + 2;
-      } else {
-        num += 100;
-        i++;
-      }
-    }
-
-    if (s[i] === "L") {
-      num += 50;
-      i++;
-    }
-
-    if (s[i] === "X") {
-      if (s[i + 1] === "C") {
-        num += 90;
-        i = i + 2;
-      } else if (s[i + 1] === "L") {
-        num += 40;
-        i = i + 2;
-      } else {
-        num += 10;
-        i++;
-      }
-    }
-
-    if (s[i] === "X") {
-      num += 10;
-      i++;
-    }
-
-    if (s[i] === "V") {
-      num += 5;
-      i++;
-    }
-
-    if (s[i] === "I") {
-      if (s[i + 1] === "X") {
-        num += 9;
-        i = i + 2;
-      } else if (s[i + 1] === "V") {
-        num += 4;
-        i = i + 2;
-      } else {
-        num += 1;
-        i++;
-      }
+  const given = {
+    M: 1000,
+    D: 500,
+    C: 100,
+    L: 50,
+    X: 10,
+    V: 5,
+    I: 1
+  };
+  for (let i = str.length - 1; i >= 0; i--) {
+    let current = given[str[i]];
+    let previous = given[str[i - 1]];
+    if (str[i - 1] && current > previous) {
+      num = num + (current - previous);
+      i--;
+    } else {
+      num = num + current;
     }
   }
   return num;
 };
 
-console.log(romanToInt("DCXXI"));
+console.log(romanToInt("LVIII"));
