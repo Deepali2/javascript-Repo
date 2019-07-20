@@ -31,9 +31,8 @@ const getAdjacentFunction = (
 };
 
 const isEasy = phoneNumber => {
-  const phoneNumberFormatted = phoneNumber.replace(/\D/g, "").trim();
+  const phoneNumberFormatted = phoneNumber.replace(/\W/g, "").trim();
   const phoneNumberArray = phoneNumberFormatted.split("").map(e => parseInt(e));
-  console.log(phoneNumberArray);
   if (phoneNumber.length <= 1) return true;
   const adjacentFunction = getAdjacentFunction();
   for (let i = 1; i < phoneNumberArray.length; i++)
