@@ -100,3 +100,6 @@ let number2 = "554-7521"; //true
 let number3 = "280-6547"; //false
 let number4 = "355-8123"; //false
 console.log(easyToUse(number1));
+console.log(easyToUse(number2));
+console.log(easyToUse(number3));
+console.log(easyToUse(number4));
