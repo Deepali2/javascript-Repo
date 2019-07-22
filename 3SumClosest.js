@@ -30,6 +30,8 @@ const threeSumClosest = (nums, target) => {
       }
       if (diff < 0) j++;
       else k--;
+      while (j > i + 1 && j < k && nums[j] == nums[j - 1]) j++;
+      while (k < nums.length - 1 && j < k && nums[k] == nums[k + 1]) k--;
     }
   }
   return num;
@@ -42,3 +44,4 @@ console.log(
     18
   )
 );
+console.log(threeSumClosest([1, 1, -1, -1, 3], -1));
