@@ -48,16 +48,14 @@ function solution(arr) {
       swap(i, arr[i] - 1);
     }
   }
-  console.log(arr);
   //main part
   for (let i = 0; i < arr.length; i++) {
     if (arr[i] !== i + 1) return i + 1;
   }
   return arr.length + 1;
 }
-
-// console.log(solution(array));
+console.log(solution(array));
 console.log(solution(arr1));
-// console.log(solution(arr2));
-// console.log(solution(arr3));
-// console.log(solution(arr4));
+console.log(solution(arr2));
+console.log(solution(arr3));
+console.log(solution(arr4));
