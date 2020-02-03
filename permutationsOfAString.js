@@ -11,9 +11,9 @@ const permutations = (string) => {
   let permutArr = [];
   for (let i = 0; i < string.length; i++) {
     for (let j = 1; j < string.length; j++) {
-        for (let k = 2; k < string.length; k++) {
-            permutArr.push(string[i] + string[j] + string[k]);
-        }
+      for (let k = 2; k < string.length; k++) {
+        permutArr.push(string[i] + string[j] + string[k]);
+      }
     }
   }
   return permutArr;
@@ -40,11 +40,11 @@ const permut = (str) => {
   const generate = (n) => {
     let regex = /([a-z])\1+/;
 
-    if (n === 1 && !regex.test(arr.join(''))){
+    if (n === 1 && !regex.test(arr.join(''))) {
       numberOfPermutations++;
       permutations.push(arr.join(''));
     } else {
-      for (let i = 0; i !== n; i++){
+      for (let i = 0; i !== n; i++) {
         generate(n - 1, arr);
         if (n % 2 === 0) {
           swap(i, n - 1);
@@ -57,7 +57,7 @@ const permut = (str) => {
   //call the recursive function called generate
   generate(arr.length);
   console.log(numberOfPermutations);
-  return permutations;  
+  return permutations;
 };
 
 console.log(permut('abhhc'));

@@ -26,13 +26,13 @@ Copyright 2009–2019 by Codility Limited. All Rights Reserved. Unauthoriz
 
 //helper function to check for the longest binary gap given a binary number
 const checkMaxBinaryGap = (binaryStr) => {
-  let maxGap = 0, count = 0, start = false;
+  let maxGap = 0, count = 0, start = true;
   for (let i = 0; i < binaryStr.length; i++) {
     let ele = binaryStr[i];
     if (ele === '1') {
       if (!start) start = true;
       else {
-        if (count > maxGap) maxGap = count;
+        if (maxGap < count) maxGap = count;
         count = 0;
       }
     } else {
