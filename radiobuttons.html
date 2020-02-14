@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Radio Buttons</title>
+  <style>
+    .red {
+      color: red;
+    }
+
+    .purple {
+      color: purple;
+    }
+
+    .blue {
+      color: blue;
+    }
+
+    .green {
+      color: green;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>RadioButtons Exercise</h1>
+  <p id='colorText'></p>
+  <form name='myForm'>
+    <input type='radio' name='radio' value='red' class='radiobutton' />
+    <label for='red' class='red'>red</label>
+    <br>
+    <input type='radio' name='radio' value='yellow' class='radiobutton' />
+    <label for='yellow' class='purple'>yellow</label>
+    <br>
+    <input type='radio' name='radio' value='blue' class='radiobutton' />
+    <label for='blue' class='blue'>blue</label>
+    <br>
+    <input type='radio' name='radio' value='green' class='radiobutton' />
+    <label for='green' class='green'>green</label>
+  </form>
+
+  <script>
+    const radios = document.myForm.radio;
+    for (let i = 0; i < radios.length; i++) {
+      radios[i].addEventListener('click', function () {
+        document.getElementById('colorText').setAttribute('class', this.value);
+        document.getElementById('colorText').innerHTML = `Your selected color is ${this.value}`;
+      })
+    }
+  </script>
+
+</body>
+
+</html>
